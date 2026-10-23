@@ -1,0 +1,21 @@
+name: tests
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  foundry:
+    name: Foundry tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Foundry
+        uses: foundry-rs/foundry-toolchain@v1
+
+      - name: Install dependencies
+        run: forge install foundry-rs/forge-std openzeppelin/openzeppelin-contracts@v5.1.0
+
+      - name: Run tests
+        run: forge test -vv
